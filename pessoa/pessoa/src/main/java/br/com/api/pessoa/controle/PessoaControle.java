@@ -7,17 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+@RequiredArgsConstructor
 @RestController
 public class PessoaControle {
 
     
     private  final PessoaRepository pr;
 
-    PessoaControle(PessoaRepository pr){
-        this.pr=pr;
-
-    }
 
     @GetMapping("/mensagem")
     public String mensagem() {
