@@ -56,7 +56,7 @@ public class PessoaControle {
 
     }
     @DeleteMapping("/{codigo}")
-    public void removerPessoa(@PathVariable Long codigo){
+    public void removerPessoa(@PathVariable Long codigo) {
         this.pr.deleteById(codigo);
     }
 
