@@ -10,7 +10,7 @@ import java.util.List;
 
 @Component
 public class Inicializador implements CommandLineRunner {
-
+    @SuppressWarnings("unused")
     private final PessoaRepository pessoaRepository;
 
     public Inicializador(PessoaRepository pessoaRepository){
@@ -18,8 +18,7 @@ public class Inicializador implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
-
-        List<PessoaModelo> listaDePessoas = new ArrayList<>();
+        //cria a tabela de dados
         String [][] dados = {
                 {"Islam Makhachev", "33", "Makhachkala", "Rússia"},
                 {"Marcelo Garcia", "42", "Maringá", "Brasil"},
@@ -38,6 +37,11 @@ public class Inicializador implements CommandLineRunner {
                 {"Daniel Cormier", "46", "Lafayette", "EUA"}
         };
 
+        /*
+         1 - Percorre a Lista
+         2 - cria nova pessoa vazia
+         3 - seta os atributos
+         4 - salva no banco de dados*/
         for (String[] pessoa: dados){
             PessoaModelo novaPessoa = new PessoaModelo();
             novaPessoa.setNome(pessoa[0]);
@@ -46,5 +50,6 @@ public class Inicializador implements CommandLineRunner {
             novaPessoa.setPais(pessoa[3]);
             pessoaRepository.save(novaPessoa);
         }
+
     }
 }

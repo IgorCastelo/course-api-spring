@@ -12,9 +12,9 @@ public class PessoaModelo{
 
 @Id
 @GeneratedValue(strategy =  GenerationType.IDENTITY)
-private long codigo ;
+private Long codigo ;
 private String nome;
-private int idade;
+private Integer idade;
 private String pais;
 private String cidade;
 
