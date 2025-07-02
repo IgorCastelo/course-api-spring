@@ -24,8 +24,8 @@ public class PessoaControle {
     }
 
     @PostMapping("/")
-    public PessoaModelo cadastarPessoa(@Valid @RequestBody PessoaModelo pm){
-        return this.pr.save(pm);
+    public ResponseEntity<PessoaModelo> cadastarPessoa(@Valid @RequestBody PessoaModelo pm){
+        return new ResponseEntity<>(this.pr.save(pm), HttpStatus.CREATED);
     }
 
     @PutMapping("/{codigo}")
