@@ -4,6 +4,8 @@ import br.com.api.pessoa.entities.PessoaModelo;
 import br.com.api.pessoa.repositores.PessoaRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -17,9 +19,10 @@ public class PessoaControle {
 
      //Rotas
     @GetMapping("/")
-    public Iterable<PessoaModelo> listaPessoas(){
-        return this.pr.findAll(); //select*from pesoas
+    public ResponseEntity<Iterable <PessoaModelo>>listaPessoas(){
+        return new ResponseEntity<>(this.pr.findAll(), HttpStatus.OK); //select*from pesoas
     }
+
     @PostMapping("/")
     public PessoaModelo cadastarPessoa(@Valid @RequestBody PessoaModelo pm){
         return this.pr.save(pm);
