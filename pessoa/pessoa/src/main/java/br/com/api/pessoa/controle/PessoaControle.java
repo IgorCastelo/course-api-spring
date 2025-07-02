@@ -2,6 +2,7 @@ package br.com.api.pessoa.controle;
 
 import br.com.api.pessoa.entities.PessoaModelo;
 import br.com.api.pessoa.repositores.PessoaRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +21,12 @@ public class PessoaControle {
         return this.pr.findAll(); //select*from pesoas
     }
     @PostMapping("/")
-    public PessoaModelo cadastarPessoa(@RequestBody PessoaModelo pm){
+    public PessoaModelo cadastarPessoa(@Valid @RequestBody PessoaModelo pm){
         return this.pr.save(pm);
     }
 
     @PutMapping("/{codigo}")
-    public  PessoaModelo alterarPessoatotal(@PathVariable Long codigo, @RequestBody PessoaModelo pm){
+    public  PessoaModelo alterarPessoatotal(@Valid @PathVariable Long codigo, @RequestBody PessoaModelo pm){
         pm.setCodigo(codigo); //seta o id no body(isd esse que foi gerado automaticamente)
         return this.pr.save(pm);
 
