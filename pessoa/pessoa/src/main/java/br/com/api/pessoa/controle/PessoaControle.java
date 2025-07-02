@@ -29,9 +29,15 @@ public class PessoaControle {
     }
 
     @PutMapping("/{codigo}")
-    public  PessoaModelo alterarPessoatotal(@Valid @PathVariable Long codigo, @RequestBody PessoaModelo pm){
-        pm.setCodigo(codigo); //seta o id no body(isd esse que foi gerado automaticamente)
-        return this.pr.save(pm);
+    public ResponseEntity<PessoaModelo> alterarPessoaTotal(@Valid @PathVariable Long codigo, @RequestBody PessoaModelo pm){
+
+        Optional<PessoaModelo> obj = this.pr.findById(codigo);
+
+        if (obj.isPresent()){
+            pm.setCodigo(codigo);//seta o id no body(isd esse que foi gerado automaticamente)
+            return new ResponseEntity<>(this.pr.save(pm), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
     @PatchMapping("/{codigo}")
