@@ -41,11 +41,12 @@ public class PessoaControle {
 
     }
     @PatchMapping("/{codigo}")
-    public PessoaModelo alterarPessoaParcial(@PathVariable Long codigo, @RequestBody PessoaModelo pm){
+    public ResponseEntity<PessoaModelo> alterarPessoaParcial(@PathVariable Long codigo, @RequestBody PessoaModelo pm){
         //obter o registro contido na tabela
         Optional<PessoaModelo> obj = this.pr.findById(codigo); // SELECT*FROM  pessoas wherw codigo = {codigo}
 
         //converter Optional para pessoa
+        if (obj.isPresent()){
         PessoaModelo pm2 = obj.get();
 
         //verificação
@@ -62,12 +63,19 @@ public class PessoaControle {
             pm2.setPais(pm.getPais());
         }
         //return
-        return this.pr.save(pm2);
+        return new ResponseEntity<>(this.pr.save(pm2), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
     @DeleteMapping("/{codigo}")
-    public void removerPessoa(@PathVariable Long codigo) {
-        this.pr.deleteById(codigo);
+    public ResponseEntity<Void> removerPessoa(@PathVariable Long codigo) {
+        boolean existecodigo = this.pr.existsById(codigo);
+        if (existecodigo){
+            this.pr.deleteById(codigo);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }
