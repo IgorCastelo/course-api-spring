@@ -18,7 +18,7 @@ public class PessoaServico {
     private final PessoaRepository pr;
 
 
-        //Rotas
+        //Metodos
 
         public ResponseEntity<Iterable <PessoaModelo>> listaPessoas(){
             return new ResponseEntity<>(this.pr.findAll(), HttpStatus.OK); //select*from pesoas
